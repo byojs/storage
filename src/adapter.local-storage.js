@@ -40,16 +40,16 @@ export default publicAPI;
 
 async function has(name) {
 	// note: https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem#return_value
-	return (window.localStorage.getItem(name) !== null);
+	return (globalThis.localStorage.getItem(name) !== null);
 }
 
 async function get(name) {
-	return safeJSONParse(window.localStorage.getItem(name));
+	return safeJSONParse(globalThis.localStorage.getItem(name));
 }
 
 async function set(name,value) {
 	try {
-		window.localStorage.setItem(
+		globalThis.localStorage.setItem(
 			name,
 			value != null && typeof value == "object" ?
 				JSON.stringify(value) :
@@ -66,25 +66,25 @@ async function set(name,value) {
 }
 
 async function remove(name) {
-	window.localStorage.removeItem(name);
+	globalThis.localStorage.removeItem(name);
 	return true;
 }
 
 async function keys() {
 	var storeKeys = [];
-	for (let i = 0; i < window.localStorage.length; i++) {
-		storeKeys.push(window.localStorage.key(i));
+	for (let i = 0; i < globalThis.localStorage.length; i++) {
+		storeKeys.push(globalThis.localStorage.key(i));
 	}
 	return storeKeys;
 }
 
 async function entries() {
 	var storeEntries = [];
-	for (let i = 0; i < window.localStorage.length; i++) {
-		let name = window.localStorage.key(i);
+	for (let i = 0; i < globalThis.localStorage.length; i++) {
+		let name = globalThis.localStorage.key(i);
 		storeEntries.push([
 			name,
-			safeJSONParse(window.localStorage.getItem(name)),
+			safeJSONParse(globalThis.localStorage.getItem(name)),
 		]);
 	}
 	return storeEntries;

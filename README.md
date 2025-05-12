@@ -24,6 +24,8 @@ await get("Hello");               // "World!"
 
 The main purpose of **Storage** is to provide a set of adapters that normalize across various client side storage mechanisms (`localStorage` / `sessionStorage`, IndexedDB, cookies, and OPFS) with a consistent key-value API (`get()`, `set()`, etc).
 
+> Note: This project is built for use in a browser context. Compatibility with other platforms is purely coincidental.
+
 ## Client Side Storage Adapters
 
 **Storage** ships with adapters for the following storage mechanisms:

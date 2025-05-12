@@ -41,16 +41,16 @@ export default publicAPI;
 
 async function has(name) {
 	// note: https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem#return_value
-	return (window.sessionStorage.getItem(name) !== null);
+	return (globalThis.sessionStorage.getItem(name) !== null);
 }
 
 async function get(name) {
-	return safeJSONParse(window.sessionStorage.getItem(name));
+	return safeJSONParse(globalThis.sessionStorage.getItem(name));
 }
 
 async function set(name,value) {
 	try {
-		window.sessionStorage.setItem(
+		globalThis.sessionStorage.setItem(
 			name,
 			value != null && typeof value == "object" ?
 				JSON.stringify(value) :
@@ -67,25 +67,25 @@ async function set(name,value) {
 }
 
 async function remove(name) {
-	window.sessionStorage.removeItem(name);
+	globalThis.sessionStorage.removeItem(name);
 	return true;
 }
 
 async function keys() {
 	var storeKeys = [];
-	for (let i = 0; i < window.sessionStorage.length; i++) {
-		storeKeys.push(window.sessionStorage.key(i));
+	for (let i = 0; i < globalThis.sessionStorage.length; i++) {
+		storeKeys.push(globalThis.sessionStorage.key(i));
 	}
 	return storeKeys;
 }
 
 async function entries() {
 	var storeEntries = [];
-	for (let i = 0; i < window.sessionStorage.length; i++) {
-		let name = window.sessionStorage.key(i);
+	for (let i = 0; i < globalThis.sessionStorage.length; i++) {
+		let name = globalThis.sessionStorage.key(i);
 		storeEntries.push([
 			name,
-			safeJSONParse(window.sessionStorage.getItem(name)),
+			safeJSONParse(globalThis.sessionStorage.getItem(name)),
 		]);
 	}
 	return storeEntries;
